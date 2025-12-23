@@ -1,20 +1,33 @@
+:root{
+    --primary-width:20em;
+}
+
 body{
     font-family: Outfit;
     background-color: #e0e9f3;
     margin: 0;
 }
 .card{
-    width: 20em;
+    width: var(--primary-width);
+    margin: 1em;
     background-color: white;
     display: grid;
-    grid-template-columns: 1;
+    grid-template-columns: 4fr 1fr;
     font-size: 20px;
     font-weight: 600;
     border-radius: 10px;
 }
 .product-image{
-    width: 10em;
-    height: 10em;
+    width: var(--primary-width);
+    height: var(--primary-width);
+    border-radius: 15px 15px 0 0;
+    grid-column: 1/3;
+}
+.name{
+    grid-column: 1/3;
+}
+.price{
+    grid-column: 1/3;
 }
 p{
     margin: 0;
@@ -23,9 +36,23 @@ p{
     border: 0;
     border-radius: 15px;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    width: 15em;
+    width: 95%;
+    color: white;
+    background-color: #151414;
+    padding: 0.4em;
+    margin: 0.3em;
+}
+.fav-button{
+    border: 0;
+    border-radius: 15px;
+    font-size: 30px;
+    font-weight: 300;
+    width: 80%;
+    background-color: #b9b9b9;
+    padding: 0.2em;
+    margin: 0.2em;
 }
 .head{
     background-color: white;
