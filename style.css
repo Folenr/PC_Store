@@ -35,7 +35,12 @@ body{
     color: white;
     background-color: #444141;
 }
-.cards{
+#cart-img{
+    height: 1.3em;
+    width: 1.3em;
+    filter:invert(100%);
+}
+#cards{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
