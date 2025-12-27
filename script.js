@@ -1,13 +1,10 @@
 const cart = document.getElementById("cart");
 let inCart = 0;
-function addToCart(){
-    inCart+=1;
-    cart.innerHTML ='<img src="cart.png" alt="cart" id="cart-img"> Cart :  '+inCart;
+function addToCart() {
+    inCart += 1;
+    cart.innerHTML = '<img src="cart.png" alt="cart" id="cart-img"> Cart :  ' + inCart;
 }
-
-const cardJ = JSON.parse('{"id":2,"name":"Rubik Cube","img":"Rubiks-Cube.jpg","price":15,"quantity":10}');
-createCard(cardJ);
-function createCard(card){
+function createCard(card) {
     const cardDiv = document.createElement('div');
     const img = document.createElement('img');
     const name = document.createElement('p');
@@ -17,15 +14,15 @@ function createCard(card){
 
     cardDiv.className = 'card';
     img.className = 'product-image';
-    img.src = cardJ.img;
-    img.alt = cardJ.name;
+    img.src = card.img;
+    img.alt = card.name;
     name.className = 'name';
-    name.innerText = cardJ.name;
+    name.innerText = card.name;
     price.className = 'price';
-    price.innerText = '$'+cardJ.price;
+    price.innerText = '$' + card.price;
     addToCartB.className = 'cart-button';
     addToCartB.innerText = 'Add To Cart';
-    addToCartB.onclick = function() {addToCart();};
+    addToCartB.onclick = function () { addToCart(); };
     fav.className = 'fav-button';
     fav.innerText = '♡';
     cardDiv.appendChild(img);
@@ -35,3 +32,9 @@ function createCard(card){
     cardDiv.appendChild(fav);
     document.getElementById('cards').appendChild(cardDiv);
 }
+
+fetch('http://localhost:8080/api/avl').then(response => response.json()).then(dataList => {
+      dataList.forEach(data => {
+          createCard(data); 
+      });
+  }).catch(error => console.error("Error:", error));

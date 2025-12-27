@@ -1,24 +1,31 @@
-class Node {
-    public int id, price, discount, shipping, quantity;
-    public String name, img, category;
-    int height;
-    Node left, right;
+package com.example.demo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-    Node(int id, int price, int discount, int shipping,String name, String img, String category, int quantity) {
-        this.id = id;
-        this.price = price;
-        this.discount = discount;
-        this.shipping = shipping;
-        this.name = name;
-        this.img = img;
-        this.category = category;
-        this.quantity = quantity;
-        this.height = 1;
-    }
+import java.util.List;
+
+class Node {
+  public int id, price, discount, shipping, quantity;
+  public String name, img, category;
+  @JsonIgnore
+  int height;
+  @JsonIgnore
+  Node left, right;
+
+  Node(int id, int price, int discount, int shipping, String name, String img, String category, int quantity) {
+    this.id = id;
+    this.price = price;
+    this.discount = discount;
+    this.shipping = shipping;
+    this.name = name;
+    this.img = img;
+    this.category = category;
+    this.quantity = quantity;
+    this.height = 1;
+  }
 }
 
 // Tree class
-class AVL {
+public class AVL {
   Node root;
 
   int height(Node N) {
@@ -59,7 +66,8 @@ class AVL {
   }
 
   // Insert a node
-  Node insertNode(Node node, int id, int price, int discount, int shipping,String name, String img, String category, int quantity) {
+  Node insertNode(Node node, int id, int price, int discount, int shipping, String name, String img, String category,
+      int quantity) {
 
     // Find the position and insert the node
     if (node == null)
@@ -153,39 +161,46 @@ class AVL {
     }
     return root;
   }
-  boolean search(Node root, int id) {
-        if (root == null)
-            return false;
-        if (root.id == id)
-            return true;
-        if (root.id < id)
-            return search(root.right, id);
-        return search(root.left, id);
-    }
+
+  Node search(Node root, int id) {
+    if (root == null)
+      return null;
+    if (root.id == id)
+      return root;
+    if (root.id < id)
+      return search(root.right, id);
+    return search(root.left, id);
+  }
 
   void inOrder(Node node) {
     if (node != null) {
-        inOrder(node.left);
-        System.out.print(node.id + " ");
+      inOrder(node.left);
+      System.out.print(node.id + " ");
       inOrder(node.right);
     }
   }
-
+  void traversal(Node node, List<Node> nodes) {
+    if (node != null) {
+       traversal(node.left, nodes);
+       nodes.add(node);
+       traversal(node.right, nodes);
+    }
+  }
   // Driver code
   public static void main(String[] args) {
     AVL tree = new AVL();
-    tree.root = tree.insertNode(tree.root, 10, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
-    tree.root = tree.insertNode(tree.root, 20, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
-    tree.root = tree.insertNode(tree.root, 30, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
-    tree.root = tree.insertNode(tree.root, 40, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
-    tree.root = tree.insertNode(tree.root, 50, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
-    tree.root = tree.insertNode(tree.root, 25, 15, 0, 20, "Rubiks-Cube","Rubiks-Cube.jpg","others", 20);
+    tree.root = tree.insertNode(tree.root, 10, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
+    tree.root = tree.insertNode(tree.root, 20, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
+    tree.root = tree.insertNode(tree.root, 30, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
+    tree.root = tree.insertNode(tree.root, 40, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
+    tree.root = tree.insertNode(tree.root, 50, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
+    tree.root = tree.insertNode(tree.root, 25, 15, 0, 20, "Rubiks-Cube", "Rubiks-Cube.jpg", "others", 20);
 
     System.out.println("In order traversal of constructed AVL tree is : ");
     tree.inOrder(tree.root);
     System.out.println();
     System.out.println(tree.search(tree.root, 20));
-    
+
     tree.root = tree.deleteNode(tree.root, 30);
     System.out.println("After Deletion: ");
     tree.inOrder(tree.root);
