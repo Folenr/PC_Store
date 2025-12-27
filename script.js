@@ -33,7 +33,7 @@ function createCard(card) {
     document.getElementById('cards').appendChild(cardDiv);
 }
 
-fetch('http://localhost:8080/api/avl').then(response => response.json()).then(dataList => {
+fetch('https://pc-store-3p6m.onrender.com/api/avl').then(response => response.json()).then(dataList => {
       dataList.forEach(data => {
           createCard(data); 
       });
