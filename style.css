@@ -25,12 +25,13 @@ body {
 }
 
 #store-name {
-    margin: 0
+    margin: 0;
+    margin-left: 1em;
 }
 
 #cart {
     margin: 0;
-    margin-right: 3em;
+    margin-right: 2em;
     font-size: 24px;
     font-weight: 500;
     padding: 0.7em;
